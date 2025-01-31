@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCatalago.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250131231441_InicialMigrations")]
-    partial class InicialMigrations
+    [Migration("20250131232131_InicialMigration")]
+    partial class InicialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
