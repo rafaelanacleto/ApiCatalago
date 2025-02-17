@@ -43,6 +43,31 @@ namespace ApiCatalago.Controllers
             _context.SaveChanges();
             return new CreatedAtRouteResult("ObterCategoria", new { id = categoria.Id }, categoria);
         }
+       
+        [HttpDelete("{id}")]
+        public ActionResult<Categoria> Delete(int id)
+        {
+            var categoria = _context.Categorias.FirstOrDefault(p => p.Id == id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            _context.Categorias.Remove(categoria);
+            _context.SaveChanges();
+            return categoria;
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, [FromBody] Categoria categoria)
+        {
+            if (id != categoria.Id)
+            {
+                return BadRequest();
+            }
+            _context.Entry(categoria).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+            return Ok();
+        }
 
     }
 }

@@ -38,5 +38,38 @@ namespace ApiCatalago.Controllers
             return produto;
         }
 
+        [HttpPost]
+        public ActionResult Post([FromBody] Produto produto)
+        {
+            _context.Produtos.Add(produto);
+            _context.SaveChanges();
+            return new CreatedAtRouteResult("ObterProduto", new { id = produto.Id }, produto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, [FromBody] Produto produto)
+        {
+            if (id != produto.Id)
+            {
+                return BadRequest();
+            }
+            _context.Entry(produto).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Produto> Delete(int id)
+        {
+            var produto = _context.Produtos.FirstOrDefault(p => p.Id == id);
+            if (produto == null)
+            {
+                return NotFound();
+            }
+            _context.Produtos.Remove(produto);
+            _context.SaveChanges();
+            return produto;
+        }
+
     }
 }
