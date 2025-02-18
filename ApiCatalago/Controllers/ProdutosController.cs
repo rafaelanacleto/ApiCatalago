@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ApiCatalago.Context;
 using ApiCatalago.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalago.Controllers
 {
@@ -22,13 +23,13 @@ namespace ApiCatalago.Controllers
         [HttpGet] // GET: api/produtos
         public ActionResult<IEnumerable<Produto>> Get()
         {
-            return _context.Produtos.ToList();
+            return _context.Produtos.AsNoTracking().ToList(); /// Usar AsNoTracking para não travar o banco de dados
         }
 
         [HttpGet("{id}", Name = "ObterProduto")]
         public ActionResult<Produto> Get(int id)
         {
-            var produto = _context.Produtos.FirstOrDefault(p => p.Id == id);
+            var produto = _context.Produtos.AsNoTracking().FirstOrDefault(p => p.Id == id);
 
             if (produto == null)
             {
