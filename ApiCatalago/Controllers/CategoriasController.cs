@@ -22,7 +22,14 @@ namespace ApiCatalago.Controllers
         [HttpGet] // GET: api/categorias
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            return _context.Categorias.ToList();
+            var categorias = _context.Categorias.ToList();
+
+            if (categorias.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return categorias;
         }
 
         [HttpGet("{id}", Name = "ObterCategoria")]

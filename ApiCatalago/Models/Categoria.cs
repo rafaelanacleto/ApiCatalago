@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ApiCatalago.Models
 {
@@ -20,7 +21,7 @@ namespace ApiCatalago.Models
 
         [Required]
         public string? ImagemPath { get; set; }
-
+        [JsonIgnore]
         public ICollection<Produto>? Produtos { get; set; }
 
     }
