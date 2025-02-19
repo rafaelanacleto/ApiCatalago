@@ -21,7 +21,7 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet] // GET: api/produtos
-        public ActionResult<IEnumerable<Produto>> Get()
+        public ActionResult<IEnumerable<Produto>> Get() ///Nunca retorne todos os registros, use Take(10) por exemplo
         {
             return _context.Produtos.AsNoTracking().ToList(); /// Usar AsNoTracking para não travar o banco de dados
         }
