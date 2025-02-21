@@ -36,7 +36,7 @@ namespace ApiCatalago.Controllers
             return Ok(categorias);
         }
 
-        [HttpGet("{id}", Name = "ObterCategoria")]
+        [HttpGet("{id}", Name = "ObterCategoriaAsync")]
         public async Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
         {
             var categoria = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
