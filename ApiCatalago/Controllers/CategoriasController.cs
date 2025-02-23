@@ -10,10 +10,10 @@ using Microsoft.EntityFrameworkCore;
 namespace ApiCatalago.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")] //rota padrão
+    [Route("api/[controller]")] //rota padrï¿½o
     public class CategoriasController : ControllerBase
     {
-        //instância de contexto via injeção de dependência
+        //instï¿½ncia de contexto via injeï¿½ï¿½o de dependï¿½ncia
         private readonly AppDbContext _context;
 
         public CategoriasController(AppDbContext contexto)
@@ -21,7 +21,7 @@ namespace ApiCatalago.Controllers
             _context = contexto;
         }
 
-        //Métodos Action: GET, POST, PUT, DELETE
+        //Mï¿½todos Action: GET, POST, PUT, DELETE
 
         [HttpGet] // GET: api/categorias
         public ActionResult<IEnumerable<Categoria>> Get()
@@ -53,7 +53,7 @@ namespace ApiCatalago.Controllers
         {
             _context.Categorias.Add(categoria);
             _context.SaveChanges();
-            return new CreatedAtRouteResult("ObterCategoria", new { id = categoria.Id }, categoria);
+            return new CreatedAtRouteResult("ObterCategoriaAsync", new { id = categoria.Id }, categoria);
         }
        
         [HttpDelete("{id}")]

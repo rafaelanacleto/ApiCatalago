@@ -9,6 +9,13 @@ public class FirstLetterCaseAttribute : ValidationAttribute
         if ((value is null || string.IsNullOrEmpty(value.ToString())))
             return ValidationResult.Success;
         
-        return base.IsValid(value, validationContext);
+        var primeiraLetra = value.ToString()[0].ToString();
+
+        if (primeiraLetra != primeiraLetra.ToUpper())
+        {
+            return new ValidationResult("A primeira letra deve ser maiuscula");
+        }
+        
+        return ValidationResult.Success;
     }
 }
