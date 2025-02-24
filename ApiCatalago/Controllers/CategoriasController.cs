@@ -28,6 +28,9 @@ namespace ApiCatalago.Controllers
         [HttpGet] // GET: api/categorias
         public ActionResult<IEnumerable<Categoria>> Get()
         {
+
+            // throw new Exception("Rafael");
+
             var categorias = _context.Categorias.ToList();
 
             //Exemplo de leitura do appSettings Json.    
