@@ -15,10 +15,12 @@ namespace ApiCatalago.Controllers
     {
         //inst�ncia de contexto via inje��o de depend�ncia
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public CategoriasController(AppDbContext contexto)
+        public CategoriasController(AppDbContext contexto, IConfiguration configuration)
         {
             _context = contexto;
+            _configuration = configuration;
         }
 
         //M�todos Action: GET, POST, PUT, DELETE
@@ -27,6 +29,9 @@ namespace ApiCatalago.Controllers
         public ActionResult<IEnumerable<Categoria>> Get()
         {
             var categorias = _context.Categorias.ToList();
+
+            //Exemplo de leitura do appSettings Json.    
+            var tes = _configuration.GetValue<string>("Chave");
 
             if (categorias.Count == 0)
             {
