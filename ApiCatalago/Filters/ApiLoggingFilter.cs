@@ -13,12 +13,18 @@ namespace ApiCatalago.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            throw new NotImplementedException();
+            //executa depois da action
+            _logger.LogInformation("### Executando -> OnActionExecuted");
+            _logger.LogInformation("############################################");
+            _logger.LogInformation($"{DateTime.Now.ToLongTimeString()}");
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            throw new NotImplementedException();
+            //executa antes da action
+            _logger.LogInformation("### Executando -> OnActionExecuting");
+            _logger.LogInformation("############################################");
+            _logger.LogInformation($"{DateTime.Now.ToLongTimeString()}");
         }
     }
 }

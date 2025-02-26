@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using ApiCatalago.Context;
 using ApiCatalago.Extensions;
+using ApiCatalago.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+
+builder.Services.AddScoped<ApiLoggingFilter>();
 
 var app = builder.Build();
 

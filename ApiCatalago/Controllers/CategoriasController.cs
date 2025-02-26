@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiCatalago.Context;
+using ApiCatalago.Filters;
 using ApiCatalago.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,20 +17,24 @@ namespace ApiCatalago.Controllers
         //inst�ncia de contexto via inje��o de depend�ncia
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext contexto, IConfiguration configuration)
+        public CategoriasController(AppDbContext contexto, IConfiguration configuration, ILogger<CategoriasController> logger)
         {
             _context = contexto;
             _configuration = configuration;
+            _logger = logger;
         }
 
         //M�todos Action: GET, POST, PUT, DELETE
 
         [HttpGet] // GET: api/categorias
+        [ServiceFilter(typeof(ApiLoggingFilter))]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
 
             // throw new Exception("Rafael");
+            _logger.LogInformation("### Acessando o CategoriasController ###");
 
             var categorias = _context.Categorias.ToList();
 
