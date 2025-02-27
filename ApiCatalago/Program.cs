@@ -18,6 +18,7 @@ var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
 builder.Services.AddScoped<ApiLoggingFilter>();
+builder.Services.AddScoped<ApiExceptionFilter>();
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {

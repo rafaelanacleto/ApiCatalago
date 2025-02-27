@@ -24,12 +24,11 @@ namespace ApiCatalago.Controllers
             _context = contexto;
             _configuration = configuration;
             _logger = logger;
-        }
-
-        //M�todos Action: GET, POST, PUT, DELETE
+        }       
 
         [HttpGet] // GET: api/categorias
         [ServiceFilter(typeof(ApiLoggingFilter))]
+        [ServiceFilter(typeof(ApiExceptionFilter))]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
 
@@ -50,6 +49,8 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
+        [ServiceFilter(typeof(ApiExceptionFilter))]
         public async Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
         {
             var categoria = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
@@ -62,6 +63,8 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
+        [ServiceFilter(typeof(ApiExceptionFilter))]
         public ActionResult Post([FromBody] Categoria categoria)
         {
             _context.Categorias.Add(categoria);
@@ -70,8 +73,12 @@ namespace ApiCatalago.Controllers
         }
        
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
+        [ServiceFilter(typeof(ApiExceptionFilter))]
         public ActionResult<Categoria> Delete(int id)
         {
+            throw new Exception("teste");
+
             var categoria = _context.Categorias.FirstOrDefault(p => p.Id == id);
             if (categoria == null)
             {
@@ -83,6 +90,8 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpPut("{id}")]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
+        [ServiceFilter(typeof(ApiExceptionFilter))]
         public ActionResult Put(int id, [FromBody] Categoria categoria)
         {
             if (id != categoria.Id)
