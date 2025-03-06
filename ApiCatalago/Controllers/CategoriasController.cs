@@ -21,15 +21,14 @@ namespace ApiCatalago.Controllers
         private readonly ICatalagoRepository _repo;
         private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext contexto, IConfiguration configuration, ILogger<CategoriasController> logger, ICatalagoRepository repository)
+        public CategoriasController(AppDbContext contexto, IConfiguration configuration,
+            ILogger<CategoriasController> logger, ICatalagoRepository repository)
         {
             _context = contexto;
             _configuration = configuration;
             _logger = logger;
             _repo = repository;
         }
-
-        //M�todos Action: GET, POST, PUT, DELETE
 
         [HttpGet] // GET: api/categorias
         [ServiceFilter(typeof(ApiLoggingFilter))]
@@ -60,6 +59,7 @@ namespace ApiCatalago.Controllers
             {
                 return NotFound();
             }
+
             return categoria;
         }
 
@@ -70,7 +70,7 @@ namespace ApiCatalago.Controllers
             _context.SaveChanges();
             return new CreatedAtRouteResult("ObterCategoriaAsync", new { id = categoria.Id }, categoria);
         }
-       
+
         [HttpDelete("{id}")]
         public ActionResult<Categoria> Delete(int id)
         {
@@ -79,6 +79,7 @@ namespace ApiCatalago.Controllers
             {
                 return NotFound();
             }
+
             _context.Categorias.Remove(categoria);
             _context.SaveChanges();
             return categoria;
@@ -91,10 +92,10 @@ namespace ApiCatalago.Controllers
             {
                 return BadRequest();
             }
+
             _context.Entry(categoria).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
             return Ok();
         }
-
     }
 }
