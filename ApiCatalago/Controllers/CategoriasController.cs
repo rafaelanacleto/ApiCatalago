@@ -35,16 +35,15 @@ namespace ApiCatalago.Controllers
         [ServiceFilter(typeof(ApiLoggingFilter))]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-
             // throw new Exception("Rafael");
             _logger.LogInformation("### Acessando o CategoriasController ###");
 
-            var categorias = _repo.GetAllCategoriasAsync(true);
+            var categorias = _repo.GetAllCategoriasAsync(true).Result;
 
             //Exemplo de leitura do appSettings Json.    
             var tes = _configuration.GetValue<string>("Chave");
 
-            if (categorias.Result.Length < 0)
+            if (categorias.Count() == 0)
             {
                 return NoContent();
             }

@@ -32,7 +32,7 @@ namespace ApiCatalago.Logging
 
         private void WriteLog(string message)
         {
-            string caminhoArquivoLog = @"E:\tmp\log.txt";
+            string caminhoArquivoLog = @"/home/rafael/tmp/log.txt";
             using (StreamWriter streamWriter = new StreamWriter(caminhoArquivoLog, true))
             {
                 streamWriter.WriteLine(message);
