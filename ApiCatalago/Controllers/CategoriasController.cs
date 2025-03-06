@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiCatalago.Context;
 using ApiCatalago.Filters;
+using ApiCatalago.Interfaces;
 using ApiCatalago.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,13 +18,15 @@ namespace ApiCatalago.Controllers
         //inst�ncia de contexto via inje��o de depend�ncia
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly ICatalagoRepository _repo;
         private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext contexto, IConfiguration configuration, ILogger<CategoriasController> logger)
+        public CategoriasController(AppDbContext contexto, IConfiguration configuration, ILogger<CategoriasController> logger, ICatalagoRepository repository)
         {
             _context = contexto;
             _configuration = configuration;
             _logger = logger;
+            _repo = repository;
         }
 
         //M�todos Action: GET, POST, PUT, DELETE
@@ -36,12 +39,12 @@ namespace ApiCatalago.Controllers
             // throw new Exception("Rafael");
             _logger.LogInformation("### Acessando o CategoriasController ###");
 
-            var categorias = _context.Categorias.ToList();
+            var categorias = _repo.GetAllCategoriasAsync(true);
 
             //Exemplo de leitura do appSettings Json.    
             var tes = _configuration.GetValue<string>("Chave");
 
-            if (categorias.Count == 0)
+            if (categorias.Result.Length < 0)
             {
                 return NoContent();
             }

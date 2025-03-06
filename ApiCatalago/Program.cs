@@ -2,7 +2,9 @@ using System.Text.Json.Serialization;
 using ApiCatalago.Context;
 using ApiCatalago.Extensions;
 using ApiCatalago.Filters;
+using ApiCatalago.Interfaces;
 using ApiCatalago.Logging;
+using ApiCatalago.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +27,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connecti
 
 builder.Services.AddScoped<ApiLoggingFilter>();
 builder.Services.AddScoped<ApiExceptionFilter>();
+builder.Services.AddScoped<ICatalagoRepository, CategoriaRepository>();
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {
