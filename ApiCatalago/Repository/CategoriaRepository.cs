@@ -21,7 +21,7 @@ namespace ApiCatalago.Repository
 
         public async Task<Categoria> GetCategoriaAsyncById(int categoriaId, bool incluirProdutos)
         {
-            return await _context.Categorias.FindAsync(categoriaId);
+            return await _context.Categorias.FirstOrDefaultAsync(c => c.Id == categoriaId);
         }
 
         public void Add(Categoria categoria)
