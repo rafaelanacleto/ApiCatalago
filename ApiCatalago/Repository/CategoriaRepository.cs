@@ -19,19 +19,40 @@ namespace ApiCatalago.Repository
             return await _context.Categorias.ToArrayAsync();
         }
 
-        public Task<Produto[]> GetAllProdutosByCategoriaIdAsync(int categoriaId, bool incluirCategoria)
+        public async Task<Categoria> GetCategoriaAsyncById(int categoriaId, bool incluirProdutos)
         {
-            throw new NotImplementedException();
+            return await _context.Categorias.FindAsync(categoriaId);
         }
 
-        public Task<Categoria> GetCategoriaAsyncById(int categoriaId, bool incluirProdutos)
+        public void Add(Categoria categoria)
         {
-            throw new NotImplementedException();
+            if (categoria == null)
+            {
+                throw new ArgumentNullException(nameof(categoria));
+            }
+
+            _context.Categorias.Add(categoria);
+            _context.SaveChanges();
         }
 
-        public Task<Produto> GetProdutoByIdAsync(int categoriaId, int produtoId, bool incluirCategoria)
+        public void Update(Categoria categoria)
         {
-            throw new NotImplementedException();
+            if (categoria == null)
+            {
+                throw new ArgumentNullException(nameof(categoria));
+            }
+
+            _context.Categorias.Update(categoria);
+            _context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            if (_context.Categorias.Find(id) != null)
+            {
+                _context.Categorias.Remove(_context.Categorias.Find(id));
+                _context.SaveChanges();
+            }
         }
     }
 }

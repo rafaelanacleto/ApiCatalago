@@ -6,7 +6,8 @@ namespace ApiCatalago.Interfaces
     {
         Task<Categoria[]> GetAllCategoriasAsync(bool incluirProdutos);
         Task<Categoria> GetCategoriaAsyncById(int categoriaId, bool incluirProdutos);
-        Task<Produto[]> GetAllProdutosByCategoriaIdAsync(int categoriaId, bool incluirCategoria);
-        Task<Produto> GetProdutoByIdAsync(int categoriaId, int produtoId, bool incluirCategoria);
+        void Add(Categoria categoria);
+        void Update(Categoria categoria);
+        void Delete(int id);
     }
 }

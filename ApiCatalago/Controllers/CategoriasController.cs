@@ -53,7 +53,7 @@ namespace ApiCatalago.Controllers
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
         public async Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
         {
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
+            var categoria = await _repo.GetCategoriaAsyncById(id, true);
 
             if (categoria == null)
             {
@@ -66,23 +66,22 @@ namespace ApiCatalago.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Categoria categoria)
         {
-            _context.Categorias.Add(categoria);
-            _context.SaveChanges();
+            _repo.Add(categoria);
             return new CreatedAtRouteResult("ObterCategoriaAsync", new { id = categoria.Id }, categoria);
         }
 
         [HttpDelete("{id}")]
         public ActionResult<Categoria> Delete(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(p => p.Id == id);
+            var categoria = _repo.GetCategoriaAsyncById(id, true);
+
             if (categoria == null)
             {
                 return NotFound();
             }
 
-            _context.Categorias.Remove(categoria);
-            _context.SaveChanges();
-            return categoria;
+            _repo.Delete(id);
+            return categoria.Result;
         }
 
         [HttpPut("{id}")]
@@ -93,8 +92,7 @@ namespace ApiCatalago.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(categoria).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
+            _repo.Update(categoria);
             return Ok();
         }
     }
