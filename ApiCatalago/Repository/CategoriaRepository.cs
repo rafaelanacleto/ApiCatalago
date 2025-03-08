@@ -21,7 +21,8 @@ namespace ApiCatalago.Repository
 
         public async Task<Categoria> GetCategoriaAsyncById(int categoriaId, bool incluirProdutos)
         {
-            return await _context.Categorias.FirstOrDefaultAsync(c => c.Id == categoriaId);
+            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Id == categoriaId);
+            return categoria ?? new Categoria(); // Substitua por valores padrão apropriados para 'Categoria'
         }
 
         public void Add(Categoria categoria)
@@ -48,9 +49,11 @@ namespace ApiCatalago.Repository
 
         public void Delete(int id)
         {
-            if (_context.Categorias.Find(id) != null)
-            {
-                _context.Categorias.Remove(_context.Categorias.Find(id));
+            var categoria = _context.Categorias.FirstOrDefault(c => c.Id == id);
+
+            if (categoria != null)
+            {                
+                _context.Categorias.Remove(categoria);
                 _context.SaveChanges();
             }
         }

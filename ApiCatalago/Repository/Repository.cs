@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalago.Repository
 {
-    public class Repository<t> : IRepository<t> where t : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly DbContext _dbContext;
 
@@ -17,7 +17,7 @@ namespace ApiCatalago.Repository
             _dbContext = dbContext;
         }
 
-        public t Create(t entity)
+        public T Create(T entity)
         {
             throw new NotImplementedException();
         }
@@ -27,17 +27,17 @@ namespace ApiCatalago.Repository
             throw new NotImplementedException();
         }
 
-        public t? Get(Expression<Func<t, bool>> predicate)
+        public T? Get(Expression<Func<T, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<t> GetAll()
+        public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public t Update(t entity)
+        public T Update(T entity)
         {
             throw new NotImplementedException();
         }
