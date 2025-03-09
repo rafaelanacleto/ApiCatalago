@@ -12,7 +12,7 @@ namespace ApiCatalago.Interfaces
         T? Get(Expression<Func<T, bool>> predicate); // _repo.Get(c => c.Id == CategoriaId);
         T Create(T entity);
         T Update(T entity);
-        void Delete(int id);
+        T Delete(T entity);
 
     }
 }

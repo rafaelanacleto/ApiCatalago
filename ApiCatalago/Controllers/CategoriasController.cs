@@ -18,11 +18,11 @@ namespace ApiCatalago.Controllers
         //inst�ncia de contexto via inje��o de depend�ncia
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
-        private readonly ICatalagoRepository _repo;
+        private readonly ICategoriaRepository _repo;
         private readonly ILogger _logger;
 
         public CategoriasController(AppDbContext contexto, IConfiguration configuration,
-            ILogger<CategoriasController> logger, ICatalagoRepository repository)
+            ILogger<CategoriasController> logger, ICategoriaRepository repository)
         {
             _context = contexto;
             _configuration = configuration;
@@ -37,7 +37,7 @@ namespace ApiCatalago.Controllers
             // throw new Exception("Rafael");
             _logger.LogInformation("### Acessando o CategoriasController ###");
 
-            var categorias = _repo.GetAllCategoriasAsync(true).Result;
+            var categorias = _repo.GetAll();
 
             //Exemplo de leitura do appSettings Json.    
             var tes = _configuration.GetValue<string>("Chave");
@@ -51,16 +51,16 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
-        public async Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
+        public Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
         {
-            var categoria = await _repo.GetCategoriaAsyncById(id, true);
+            var categoria =  _repo.Get(c => c.Id == id);
 
             if (categoria == null)
             {
-                return NotFound();
+                return null;
             }
 
-            return categoria;
+            return categoria.Re
         }
 
         [HttpPost]

@@ -27,7 +27,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connecti
 
 builder.Services.AddScoped<ApiLoggingFilter>();
 builder.Services.AddScoped<ApiExceptionFilter>();
-builder.Services.AddScoped<ICatalagoRepository, CategoriaRepository>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {

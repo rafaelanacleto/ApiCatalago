@@ -19,27 +19,33 @@ namespace ApiCatalago.Repository
 
         public T Create(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<T>().Add(entity);
+            _dbContext.SaveChanges();
+            return entity;
         }
 
-        public void Delete(int id)
+        public T Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<T>().Remove(entity);
+            _dbContext.SaveChanges();
+            return entity;
         }
 
         public T? Get(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<T>().SingleOrDefault(predicate);
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<T>().ToList();
         }
 
         public T Update(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+            return entity;
         }
     }
 }
