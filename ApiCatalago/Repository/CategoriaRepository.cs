@@ -3,12 +3,11 @@ using ApiCatalago.Interfaces;
 using ApiCatalago.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiCatalago.Repository
+namespace ApiCatalago.Repository;
+
+public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
 {
-    public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
+    public CategoriaRepository(AppDbContext dbContext) : base(dbContext)
     {
-        public CategoriaRepository(DbContext dbContext) : base(dbContext)
-        {
-        }
     }
 }

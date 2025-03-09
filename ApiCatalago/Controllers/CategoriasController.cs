@@ -14,17 +14,14 @@ namespace ApiCatalago.Controllers
     [ApiController]
     [Route("api/[controller]")] //rota padr�o
     public class CategoriasController : ControllerBase
-    {
-        //inst�ncia de contexto via inje��o de depend�ncia
-        private readonly AppDbContext _context;
+    {       
         private readonly IConfiguration _configuration;
         private readonly ICategoriaRepository _repo;
         private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext contexto, IConfiguration configuration,
+        public CategoriasController(IConfiguration configuration,
             ILogger<CategoriasController> logger, ICategoriaRepository repository)
-        {
-            _context = contexto;
+        {           
             _configuration = configuration;
             _logger = logger;
             _repo = repository;
@@ -51,7 +48,7 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
-        public Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
+        public ActionResult<Categoria> GetCategoriasAsync(int id)
         {
             var categoria =  _repo.Get(c => c.Id == id);
 
@@ -60,28 +57,28 @@ namespace ApiCatalago.Controllers
                 return null;
             }
 
-            return categoria.Re
+            return Ok(categoria);
         }
 
         [HttpPost]
         public ActionResult Post([FromBody] Categoria categoria)
         {
-            _repo.Add(categoria);
+            _repo.Create(categoria);
             return new CreatedAtRouteResult("ObterCategoriaAsync", new { id = categoria.Id }, categoria);
         }
 
         [HttpDelete("{id}")]
         public ActionResult<Categoria> Delete(int id)
         {
-            var categoria = _repo.GetCategoriaAsyncById(id, true);
+            var categoria = _repo.Get(c => c.Id == id);
+            var cat = _repo.Delete(categoria);
 
             if (categoria == null)
             {
                 return NotFound();
             }
 
-            _repo.Delete(id);
-            return categoria.Result;
+            return categoria;
         }
 
         [HttpPut("{id}")]
