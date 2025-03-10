@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using ApiCatalago.Context;
 using ApiCatalago.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +11,9 @@ namespace ApiCatalago.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext _dbContext;
+        protected readonly AppDbContext _dbContext;
 
-        public Repository(DbContext dbContext)
+        public Repository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }

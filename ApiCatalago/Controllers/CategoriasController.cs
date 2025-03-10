@@ -16,11 +16,11 @@ namespace ApiCatalago.Controllers
     public class CategoriasController : ControllerBase
     {       
         private readonly IConfiguration _configuration;
-        private readonly ICategoriaRepository _repo;
+        private readonly IRepository<Categoria> _repo;
         private readonly ILogger _logger;
 
         public CategoriasController(IConfiguration configuration,
-            ILogger<CategoriasController> logger, ICategoriaRepository repository)
+            ILogger<CategoriasController> logger, IRepository<Categoria> repository)
         {           
             _configuration = configuration;
             _logger = logger;
