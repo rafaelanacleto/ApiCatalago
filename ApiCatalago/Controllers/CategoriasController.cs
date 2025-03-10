@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ApiCatalago.Context;
 using ApiCatalago.Filters;
 using ApiCatalago.Interfaces;
+using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,15 +17,15 @@ namespace ApiCatalago.Controllers
     public class CategoriasController : ControllerBase
     {       
         private readonly IConfiguration _configuration;
-        private readonly IRepository<Categoria> _repo;
+        private readonly IDbUnitOfWork _uof;
         private readonly ILogger _logger;
 
         public CategoriasController(IConfiguration configuration,
-            ILogger<CategoriasController> logger, IRepository<Categoria> repository)
+            ILogger<CategoriasController> logger, IDbUnitOfWork dbUnitOf)
         {           
             _configuration = configuration;
             _logger = logger;
-            _repo = repository;
+            _uof = dbUnitOf;
         }
 
         [HttpGet] // GET: api/categorias
@@ -34,7 +35,7 @@ namespace ApiCatalago.Controllers
             // throw new Exception("Rafael");
             _logger.LogInformation("### Acessando o CategoriasController ###");
 
-            var categorias = _repo.GetAll();
+            var categorias = _uof.CategoriaRepository.GetAll();
 
             //Exemplo de leitura do appSettings Json.    
             var tes = _configuration.GetValue<string>("Chave");
@@ -50,7 +51,7 @@ namespace ApiCatalago.Controllers
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
         public ActionResult<Categoria> GetCategoriasAsync(int id)
         {
-            var categoria =  _repo.Get(c => c.Id == id);
+            var categoria = _uof.CategoriaRepository.Get(c => c.Id == id);
 
             if (categoria == null)
             {
@@ -63,15 +64,17 @@ namespace ApiCatalago.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Categoria categoria)
         {
-            _repo.Create(categoria);
+            _uof.CategoriaRepository.Create(categoria);
+            _uof.Commit();
             return new CreatedAtRouteResult("ObterCategoriaAsync", new { id = categoria.Id }, categoria);
         }
 
         [HttpDelete("{id}")]
         public ActionResult<Categoria> Delete(int id)
         {
-            var categoria = _repo.Get(c => c.Id == id);
-            var cat = _repo.Delete(categoria);
+            var categoria = _uof.CategoriaRepository.Get(c => c.Id == id);
+            var cat = _uof.CategoriaRepository.Delete(categoria);
+            _uof.Commit();
 
             if (categoria == null)
             {
@@ -89,7 +92,8 @@ namespace ApiCatalago.Controllers
                 return BadRequest();
             }
 
-            _repo.Update(categoria);
+            _uof.CategoriaRepository.Update(categoria);
+            _uof.Commit();
             return Ok();
         }
     }

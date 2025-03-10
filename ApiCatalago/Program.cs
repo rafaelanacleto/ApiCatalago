@@ -3,6 +3,7 @@ using ApiCatalago.Context;
 using ApiCatalago.Extensions;
 using ApiCatalago.Filters;
 using ApiCatalago.Interfaces;
+using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Logging;
 using ApiCatalago.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<ApiExceptionFilter>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IDbUnitOfWork, UnitOfWork>();
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {
