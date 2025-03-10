@@ -21,14 +21,14 @@ namespace ApiCatalago.Repository
         public T Create(T entity)
         {
             _dbContext.Set<T>().Add(entity);
-            _dbContext.SaveChanges();
+            //_dbContext.SaveChanges();
             return entity;
         }
 
         public T Delete(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
-            _dbContext.SaveChanges();
+            //_dbContext.SaveChanges();
             return entity;
         }
 
@@ -39,13 +39,14 @@ namespace ApiCatalago.Repository
 
         public IEnumerable<T> GetAll()
         {
-            return _dbContext.Set<T>().ToList();
+            return _dbContext.Set<T>().AsNoTracking().ToList();
         }
 
         public T Update(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            _dbContext.SaveChanges();
+            _dbContext.Set<T>().Update(entity);
+            //_dbContext.Entry(entity).State = EntityState.Modified;
+            //_dbContext.SaveChanges();
             return entity;
         }
     }

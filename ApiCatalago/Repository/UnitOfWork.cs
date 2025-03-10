@@ -7,15 +7,42 @@ namespace ApiCatalago.Repository
 {
     public class UnitOfWork : IDbUnitOfWork
     {
-        private readonly AppDbContext _context;
+        public AppDbContext _context;
 
-        public IProdutoRepository ProdutoRepository => throw new NotImplementedException();
+        private IProdutoRepository? _produtoRepo;
 
-        public ICategoriaRepository CategoriaRepository => throw new NotImplementedException();
+        private ICategoriaRepository? _categoriaRepo;
+
+        public UnitOfWork(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public IProdutoRepository ProdutoRepository
+        {
+            get
+            {
+                return _produtoRepo ??= new ProdutoRepository(_context);
+            }
+        }
+
+        public ICategoriaRepository CategoriaRepository
+        {
+            get
+            {
+                return _categoriaRepo ??= new CategoriaRepository(_context);
+            }
+        }
 
         public void Commit()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }  
+        
     }
 }
