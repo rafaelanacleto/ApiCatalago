@@ -7,6 +7,7 @@ using ApiCatalago.Filters;
 using ApiCatalago.Interfaces;
 using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,13 +20,15 @@ namespace ApiCatalago.Controllers
         private readonly IConfiguration _configuration;
         private readonly IDbUnitOfWork _uof;
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
 
         public CategoriasController(IConfiguration configuration,
-            ILogger<CategoriasController> logger, IDbUnitOfWork dbUnitOf)
-        {           
+            ILogger<CategoriasController> logger, IDbUnitOfWork dbUnitOf, IMapper mapper)
+        {
             _configuration = configuration;
             _logger = logger;
             _uof = dbUnitOf;
+            _mapper = mapper;
         }
 
         [HttpGet] // GET: api/categorias

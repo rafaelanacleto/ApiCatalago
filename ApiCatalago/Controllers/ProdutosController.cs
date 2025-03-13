@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiCatalago.Context;
+using ApiCatalago.Dtos;
 using ApiCatalago.Interfaces;
 using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,21 +19,23 @@ namespace ApiCatalago.Controllers
     {
         private readonly IDbUnitOfWork _uof;
         private readonly IRepository<Produto> _repository;
+         private readonly IMapper _mapper;
 
-        public ProdutosController(IDbUnitOfWork produtoRepository, IRepository<Produto> repository)
+        public ProdutosController(IDbUnitOfWork produtoRepository, IRepository<Produto> repository, IMapper mapper)
         {
             _uof = produtoRepository;
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet] // GET: api/produtos
-        public ActionResult<IEnumerable<Produto>> Get() ///Nunca retorne todos os registros, use Take(10) por exemplo
+        public ActionResult<IEnumerable<ProdutoDTO>> Get() ///Nunca retorne todos os registros, use Take(10) por exemplo
         {
-            return _uof.ProdutoRepository.GetAll().ToList();
+            return _mapper.Map<List<ProdutoDTO>>(_uof.ProdutoRepository.GetAll().ToList());
         }
 
         [HttpGet("{id}", Name = "ObterProduto")]
-        public ActionResult<Produto> Get(int id)
+        public ActionResult<ProdutoDTO> Get(int id)
         {
             var produto = _uof.ProdutoRepository.Get(p => p.Id == id);
 
@@ -40,7 +44,7 @@ namespace ApiCatalago.Controllers
                 return NotFound();
             }
 
-            return produto;
+            return _mapper.Map<ProdutoDTO>(produto);
         }
 
         [HttpPost]

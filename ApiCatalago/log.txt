@@ -1,0 +1,116 @@
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /media/rafael-anacleto/Dados/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:21:52 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:21:52 PM
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:21:53 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:21:53 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:22:14 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImagemUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:22:14 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:22:54 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (31ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 300), @p3='?' (DbType = Single), @p4='?' (Size = 4000), @p5='?' (Size = 80), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Produtos` (`CategoriaId`, `DataCadastro`, `Descricao`, `Estoque`, `ImagemUrl`, `Nome`, `Preco`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `Id`
+FROM `Produtos`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:22:55 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:23:20 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 300), @p3='?' (DbType = Single), @p4='?' (Size = 4000), @p5='?' (Size = 80), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Produtos` (`CategoriaId`, `DataCadastro`, `Descricao`, `Estoque`, `ImagemUrl`, `Nome`, `Preco`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `Id`
+FROM `Produtos`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:23:20 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:23:25 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImagemUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:23:25 PM
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /media/rafael-anacleto/Dados/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:25:01 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImagemUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:25:02 PM
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /media/rafael-anacleto/Dados/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:25:40 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImagemUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:25:41 PM
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /media/rafael-anacleto/Dados/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:27:56 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImagemUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:27:57 PM
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:28:07 PM
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (28ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImagemUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+WHERE `p`.`Id` = @__id_0
+LIMIT 2
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 2:28:07 PM
