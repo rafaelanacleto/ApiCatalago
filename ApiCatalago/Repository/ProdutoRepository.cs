@@ -12,6 +12,14 @@ public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
     }
 
+    public IEnumerable<Produto> GetProdutosPage(ProdutoParametersQuery produtoParameters)
+    {
+        return GetAll()
+            .Skip((produtoParameters.Quantidade - 1) * produtoParameters.Pagina)
+            .Take(produtoParameters.Quantidade)
+            .ToList();
+    }
+
     public IEnumerable<Produto> GetProdutosPorCategoria(int id)
     {
         return GetAll().Where(p => p.CategoriaId == id); 

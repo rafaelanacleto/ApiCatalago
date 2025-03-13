@@ -34,6 +34,17 @@ namespace ApiCatalago.Controllers
             return _mapper.Map<List<ProdutoDTO>>(_uof.ProdutoRepository.GetAll().ToList());
         }
 
+        [HttpGet("Pagination")] // GET: api/produtos
+        public ActionResult<IEnumerable<ProdutoDTO>> Get([FromQuery] ProdutoParametersQuery produtoParameters) ///Nunca retorne todos os registros, use Take(10) por exemplo
+        {
+
+            var produtos = _uof.ProdutoRepository.GetProdutosPage(produtoParameters).ToList();
+            var produtosResult = _mapper.Map<List<ProdutoDTO>>(produtos);
+
+            return Ok(produtosResult);            
+        }
+
+
         [HttpGet("{id}", Name = "ObterProduto")]
         public ActionResult<ProdutoDTO> Get(int id)
         {
