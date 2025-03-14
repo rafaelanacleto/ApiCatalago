@@ -7,9 +7,11 @@ using ApiCatalago.Dtos;
 using ApiCatalago.Interfaces;
 using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
+using ApiCatalago.Pagination;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ApiCatalago.Controllers
 {
@@ -19,7 +21,7 @@ namespace ApiCatalago.Controllers
     {
         private readonly IDbUnitOfWork _uof;
         private readonly IRepository<Produto> _repository;
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public ProdutosController(IDbUnitOfWork produtoRepository, IRepository<Produto> repository, IMapper mapper)
         {
@@ -27,20 +29,29 @@ namespace ApiCatalago.Controllers
             _repository = repository;
             _mapper = mapper;
         }
+
         //
         // [HttpGet("filter/preco/pagination")]
         // public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco filtro)
         // {
-        //     //TODO: Fazer implementacao 
+        //     
         // }
         //
-        // private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
-        // {
-        //     var medata = new
-        //     {
-        //         produtos.
-        //     }
-        // }
+        private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
+        {
+            var metadata = new
+            {
+                produtos.TotalCount,
+                produtos.PageSize,
+                produtos.CurrentPage,
+                produtos.TotalPages,
+                produtos.HasNext,
+                produtos.HasPrevious
+            };
+            Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
+            var produtosResult = _mapper.Map<List<ProdutoDTO>>(produtos);
+            return Ok(produtosResult);
+        }
 
         [HttpGet] // GET: api/produtos
         public ActionResult<IEnumerable<ProdutoDTO>> Get() ///Nunca retorne todos os registros, use Take(10) por exemplo
@@ -49,13 +60,22 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet("Pagination")] // GET: api/produtos
-        public ActionResult<IEnumerable<ProdutoDTO>> Get([FromQuery] ProdutoParametersQuery produtoParameters) ///Nunca retorne todos os registros, use Take(10) por exemplo
+        public ActionResult<IEnumerable<ProdutoDTO>>
+            Get([FromQuery] ProdutoParametersQuery produtoParameters) ///Nunca retorne todos os registros, use Take(10) por exemplo
         {
-
-            var produtos = _uof.ProdutoRepository.GetProdutosPage(produtoParameters).ToList();
+            var produtos = _uof.ProdutoRepository.GetProdutosPage(produtoParameters);
+            var metadata = new
+            {
+                produtos.TotalCount,
+                produtos.PageSize,
+                produtos.CurrentPage,
+                produtos.TotalPages,
+                produtos.HasNext,
+                produtos.HasPrevious
+            };
+            Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
             var produtosResult = _mapper.Map<List<ProdutoDTO>>(produtos);
-
-            return Ok(produtosResult);            
+            return Ok(produtosResult);
         }
 
 
@@ -87,7 +107,7 @@ namespace ApiCatalago.Controllers
             {
                 return BadRequest();
             }
-            
+
             _uof.ProdutoRepository.Update(produto);
             _uof.Commit();
             return Ok();
@@ -100,8 +120,6 @@ namespace ApiCatalago.Controllers
             _uof.ProdutoRepository.Delete(produto);
             _uof.Commit();
             return produto;
-
         }
-
     }
 }

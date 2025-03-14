@@ -1,11 +1,12 @@
 using ApiCatalago.Models;
+using ApiCatalago.Pagination;
 
 namespace ApiCatalago.Interfaces;
 
 public interface IProdutoRepository : IRepository<Produto>
 {
     IEnumerable<Produto> GetProdutosPorCategoria(int id);
-
-    IEnumerable<Produto> GetProdutosPage(ProdutoParametersQuery produtoParameters);
+    PagedList<Produto> GetProdutosPage(ProdutoParametersQuery produtoParameters);
+    PagedList<Produto> GetProdutosFiltroPreco(ProdutoParametersQuery produtoParameters);
     
 }
