@@ -27,6 +27,20 @@ namespace ApiCatalago.Controllers
             _repository = repository;
             _mapper = mapper;
         }
+        //
+        // [HttpGet("filter/preco/pagination")]
+        // public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco filtro)
+        // {
+        //     //TODO: Fazer implementacao 
+        // }
+        //
+        // private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
+        // {
+        //     var medata = new
+        //     {
+        //         produtos.
+        //     }
+        // }
 
         [HttpGet] // GET: api/produtos
         public ActionResult<IEnumerable<ProdutoDTO>> Get() ///Nunca retorne todos os registros, use Take(10) por exemplo
