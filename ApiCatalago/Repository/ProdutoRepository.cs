@@ -28,7 +28,16 @@ public class ProdutoRepository : Repository<Produto>, IProdutoRepository
 
         if (produtoParameters.Preco.HasValue && !string.IsNullOrEmpty(produtoParameters.PrecoCriterio))
         {
-            
+            return produtoParameters.PrecoCriterio switch
+            {
+                "maior" => PagedList<Produto>.Create(produtos.Where(p => p.Preco > produtoParameters.Preco), 1, 10),
+                "menor" => PagedList<Produto>.Create(produtos.Where(p => p.Preco < produtoParameters.Preco), 1, 10),
+                _ => PagedList<Produto>.Create(produtos.Where(p => p.Preco == produtoParameters.Preco), 1, 10)
+            };
+        }
+        else
+        {
+            return PagedList<Produto>.Create(produtos, 1, 10);
         }
     }
 

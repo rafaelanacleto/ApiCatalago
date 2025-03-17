@@ -30,13 +30,15 @@ namespace ApiCatalago.Controllers
             _mapper = mapper;
         }
 
-        //
-        // [HttpGet("filter/preco/pagination")]
-        // public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco filtro)
-        // {
-        //     
-        // }
-        //
+
+        [HttpGet("filter/preco/pagination")]
+        public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco filtro)
+        {
+            var produtos = _uof.ProdutoRepository.GetProdutosFiltroPreco(filtro);
+            return ObterProdutos(produtos);
+        }
+
+
         private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
         {
             var metadata = new
