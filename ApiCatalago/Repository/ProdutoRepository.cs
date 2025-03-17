@@ -22,9 +22,14 @@ public class ProdutoRepository : Repository<Produto>, IProdutoRepository
         return PagedList<Produto>.Create(produtos, produtoParameters.Pagina, produtoParameters.Quantidade);
     }
 
-    public PagedList<Produto> GetProdutosFiltroPreco(ProdutoParametersQuery produtoParameters)
+    public PagedList<Produto> GetProdutosFiltroPreco(ProdutosFiltroPreco produtoParameters)
     {
-        throw new NotImplementedException();
+        var produtos = GetAll().AsQueryable();
+
+        if (produtoParameters.Preco.HasValue && !string.IsNullOrEmpty(produtoParameters.PrecoCriterio))
+        {
+            
+        }
     }
 
     public IEnumerable<Produto> GetProdutosPorCategoria(int id)
