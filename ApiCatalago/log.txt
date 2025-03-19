@@ -234,3 +234,82 @@ FROM `Produtos` AS `p`
  Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
  Information - ID: 0 - Name:  - ############################################
  Information - ID: 0 - Name:  - 14:06:31
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /home/rafaelanacleto/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Error - ID: 0 - Name:  - ### ApiExceptionFilter ### Unable to connect to any of the specified MySQL hosts.
+ Information - ID: 0 - Name:  - Application is shutting down...
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (26ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE DATABASE `ApiCatalago`;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (54ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='ApiCatalago' AND TABLE_NAME='__EFMigrationsHistory';
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (24ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+ Information - ID: 20402 - Name: Microsoft.EntityFrameworkCore.Migrations.MigrationApplying - Applying migration '20250131232131_InicialMigration'.
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER DATABASE CHARACTER SET utf8mb4;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (54ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE `Categorias` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `Nome` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `ImagemPath` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Categorias` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (146ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE `Produtos` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `Nome` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `Descricao` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `Preco` decimal(65,30) NOT NULL,
+    `ImagemUrl` longtext CHARACTER SET utf8mb4 NULL,
+    `Estoque` float NOT NULL,
+    `DataCadastro` datetime(6) NOT NULL,
+    `CategoriaId` int NOT NULL,
+    CONSTRAINT `PK_Produtos` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_Produtos_Categorias_CategoriaId` FOREIGN KEY (`CategoriaId`) REFERENCES `Categorias` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (55ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX `IX_Produtos_CategoriaId` ON `Produtos` (`CategoriaId`);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20250131232131_InicialMigration', '8.0.12');
+ Information - ID: 20402 - Name: Microsoft.EntityFrameworkCore.Migrations.MigrationApplying - Applying migration '20250210213238_AjustesTamanhoCampos'.
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (160ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Produtos` MODIFY COLUMN `Preco` decimal(10,2) NOT NULL;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (138ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Produtos` MODIFY COLUMN `Nome` varchar(80) CHARACTER SET utf8mb4 NOT NULL;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+UPDATE `Produtos` SET `ImagemUrl` = ''
+WHERE `ImagemUrl` IS NULL;
+SELECT ROW_COUNT();
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (272ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Produtos` MODIFY COLUMN `ImagemUrl` longtext CHARACTER SET utf8mb4 NOT NULL;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (382ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Produtos` MODIFY COLUMN `Descricao` varchar(300) CHARACTER SET utf8mb4 NOT NULL;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (135ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Categorias` MODIFY COLUMN `Nome` varchar(80) CHARACTER SET utf8mb4 NOT NULL;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+UPDATE `Categorias` SET `ImagemPath` = ''
+WHERE `ImagemPath` IS NULL;
+SELECT ROW_COUNT();
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (104ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Categorias` MODIFY COLUMN `ImagemPath` longtext CHARACTER SET utf8mb4 NOT NULL;
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20250210213238_AjustesTamanhoCampos', '8.0.12');
+ Information - ID: 20402 - Name: Microsoft.EntityFrameworkCore.Migrations.MigrationApplying - Applying migration '20250211223023_PopulaCategorias'.
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO Categorias (Nome, ImagemPath) VALUES ('Bebidas', 'bebidas.jpg')
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20250211223023_PopulaCategorias', '8.0.12');

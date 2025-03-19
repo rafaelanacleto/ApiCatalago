@@ -1,0 +1,45 @@
+Sim, é totalmente possível e até recomendado usar o MySQL como um contêiner Docker em vez de instalá-lo diretamente no seu Pop!_OS. Essa abordagem oferece várias vantagens, como isolamento, portabilidade e facilidade de gerenciamento.
+
+Vantagens de usar o MySQL no Docker:
+
+    Isolamento: O MySQL é executado em um contêiner isolado, o que evita conflitos com outras aplicações e bibliotecas no seu sistema operacional.
+    Portabilidade: Você pode facilmente mover o contêiner MySQL para outros ambientes, como servidores de produção ou outros computadores, sem se preocupar com problemas de compatibilidade.
+    Gerenciamento simplificado: O Docker facilita a criação, o gerenciamento e a exclusão de instâncias do MySQL. Você pode iniciar, parar e reiniciar o contêiner com comandos simples.
+    Consistência: Garante que o MySQL roda sempre da mesma forma, independente do sistema hospedeiro.
+
+Como executar o MySQL no Docker:
+
+    Puxe a imagem do MySQL:
+        Abra um terminal e execute o seguinte comando para baixar a imagem oficial do MySQL do Docker Hub:
+            docker pull mysql
+    Execute o contêiner MySQL:
+        Use o seguinte comando para iniciar um contêiner MySQL:
+            docker run -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=sua_senha -d mysql
+            Substitua "sua_senha" por uma senha forte para o usuário root do MySQL.
+            -p 3306:3306 mapeia a porta 3306 do contêiner para a porta 3306 do seu host, permitindo que você se conecte ao MySQL a partir do seu Pop!_OS.
+            --name mysql-container atribui o nome "mysql-container" ao seu contêiner.
+            -e MYSQL_ROOT_PASSWORD=sua_senha define a senha do root do banco de dados.
+            -d executa o contêiner em segundo plano (detached mode).
+    Verifique se o contêiner está em execução:
+        Execute o seguinte comando para listar os contêineres em execução:
+            docker ps
+        Você deverá ver o contêiner "mysql-container" na lista.
+    Conecte-se ao MySQL:
+        Você pode usar um cliente MySQL, como o MySQL Workbench ou o cliente de linha de comando mysql, para se conectar ao banco de dados.
+        Para se conectar usando o cliente de linha de comando:
+            mysql -u root -p -h 127.0.0.1
+            Digite a senha que você definiu ao executar o contêiner.
+
+Persistência de dados:
+
+    Por padrão, os dados do MySQL são armazenados dentro do contêiner. Se você excluir o contêiner, os dados serão perdidos.
+    Para persistir os dados, você pode usar volumes do Docker. Isso permite que você armazene os dados em um diretório no seu host, que persistirá mesmo se o contêiner for excluído.
+    Exemplo de comando usando volumes:
+        docker run -v mysql-data:/var/lib/mysql -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=sua_senha -d mysql
+        nesse caso, sera criado um volume chamado mysql-data, que armazenará os dados do banco de dados.
+
+Considerações:
+
+    Certifique-se de escolher uma senha forte para o usuário root do MySQL.
+    Considere usar volumes do Docker para persistir os dados do MySQL.
+    Para um ambiente de produção o uso do docker-compose é extremamente recomendado.
