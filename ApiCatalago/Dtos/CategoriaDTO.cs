@@ -7,9 +7,9 @@ namespace ApiCatalago.Dtos
 {
     public class CategoriaDTO
     {
-        public int CategoriaId { get; set; }
+        public int Id { get; set; }
         public string? Nome { get; set; }
-        public string? ImagemUrl { get; set; }
+        public string? ImagemPath { get; set; }
         
     }
 }

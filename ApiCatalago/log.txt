@@ -584,3 +584,163 @@ FROM `Produtos` AS `p`
  Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
  Information - ID: 0 - Name:  - ############################################
  Information - ID: 0 - Name:  - 21:03:28
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:36:26
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:36:26
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (28ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:36:27
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:36:27
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:36:55
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (26ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 80)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Categorias` (`ImagemPath`, `Nome`)
+VALUES (@p0, @p1);
+SELECT `Id`
+FROM `Categorias`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:36:55
+ Information - ID: 0 - Name:  - Application is shutting down...
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Error - ID: 1 - Name: UnhandledException - An unhandled exception has occurred while executing the request.
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 19:59:54
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 19:59:54
+ Information - ID: 0 - Name:  - ### Acessando CategoriaPaginationAsync ...
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (30ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 19:59:56
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 19:59:56
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:00:06
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:00:06
+ Information - ID: 0 - Name:  - ### Acessando CategoriaPaginationAsync ...
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:00:06
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:00:06
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:01
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:01
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:02
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:02
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:42
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:42
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:42
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:01:42
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:05:18
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:05:18
+ Information - ID: 0 - Name:  - ### Acessando CategoriaPaginationAsync ...
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:09:13
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:09:13
+ Information - ID: 0 - Name:  - ### Acessando CategoriaPaginationAsync ...
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`ImagemPath`, `c`.`Nome`
+FROM `Categorias` AS `c`
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:09:17
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:09:17

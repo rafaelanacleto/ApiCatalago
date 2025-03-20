@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiCatalago.Context;
+using ApiCatalago.Dtos;
 using ApiCatalago.Filters;
 using ApiCatalago.Interfaces;
 using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
+using ApiCatalago.Pagination;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ApiCatalago.Controllers
 {
@@ -49,6 +52,36 @@ namespace ApiCatalago.Controllers
             }
 
             return Ok(categorias);
+        }
+
+        [HttpGet("Pagination")] // GET: api/categorias
+        [ServiceFilter(typeof(ApiLoggingFilter))]
+        public async Task<ActionResult<IEnumerable<Categoria>>> CategoriaPagination([FromQuery] CategoriaParametersQuery parametersQuery)
+        {            
+            _logger.LogInformation("### Acessando CategoriaPaginationAsync ...");
+            var categorias = await _uof.CategoriaRepository.GetCategoriasAsync(parametersQuery);
+
+            //Exemplo de leitura do appSettings Json.    
+            //var tes = _configuration.GetValue<string>("Chave");
+            if (!categorias.Any()) return NoContent();
+            return Ok(ObterCategorias(categorias));
+        }
+
+        private ActionResult<IEnumerable<ProdutoDTO>> ObterCategorias(PagedList<Categoria> categorias)
+        {
+            var metadata = new
+            {
+                categorias.TotalCount,
+                categorias.PageSize,
+                categorias.CurrentPage,
+                categorias.TotalPages,
+                categorias.HasNext,
+                categorias.HasPrevious
+            };
+
+            Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
+            var categoriasResult = _mapper.Map<List<CategoriaDTO>>(categorias);
+            return Ok(categoriasResult);
         }
 
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
