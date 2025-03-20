@@ -32,14 +32,14 @@ namespace ApiCatalago.Repository
             return entity;
         }
 
-        public T? Get(Expression<Func<T, bool>> predicate)
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            return _dbContext.Set<T>().SingleOrDefault(predicate);
+            return await _dbContext.Set<T>().SingleOrDefaultAsync(predicate);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return _dbContext.Set<T>().AsNoTracking().ToList();
+            return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public T Update(T entity)

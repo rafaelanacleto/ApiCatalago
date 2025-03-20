@@ -13,18 +13,18 @@ public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
     }
 
-    public PagedList<Produto> GetProdutosPage(ProdutoParametersQuery produtoParameters)
+    public async Task<PagedList<Produto>> GetProdutosPageAsync(ProdutoParametersQuery produtoParameters)
     {
-        var produtos = GetAll()
+        var produtos = (await GetAllAsync())
             .OrderBy(p => p.Id)
             .AsQueryable();
         
         return PagedList<Produto>.Create(produtos, produtoParameters.Pagina, produtoParameters.Quantidade);
     }
 
-    public PagedList<Produto> GetProdutosFiltroPreco(ProdutosFiltroPreco produtoParameters)
+    public async Task<PagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtoParameters)
     {
-        var produtos = GetAll().AsQueryable();
+        var produtos = (await GetAllAsync()).AsQueryable();
 
         if (produtoParameters.Preco.HasValue && !string.IsNullOrEmpty(produtoParameters.PrecoCriterio))
         {
@@ -41,8 +41,9 @@ public class ProdutoRepository : Repository<Produto>, IProdutoRepository
         }
     }
 
-    public IEnumerable<Produto> GetProdutosPorCategoria(int id)
+    public async Task<IEnumerable<Produto>> GetProdutosPorCategoriaAsync(int id)
     {
-        return GetAll().Where(p => p.CategoriaId == id); 
+        return (await GetAllAsync()).Where(p => p.CategoriaId == id);
     }
+
 }

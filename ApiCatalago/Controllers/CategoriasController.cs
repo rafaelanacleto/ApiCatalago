@@ -33,12 +33,12 @@ namespace ApiCatalago.Controllers
 
         [HttpGet] // GET: api/categorias
         [ServiceFilter(typeof(ApiLoggingFilter))]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public async Task<ActionResult<IEnumerable<Categoria>>> GetAsync()
         {
             // throw new Exception("Rafael");
             _logger.LogInformation("### Acessando o CategoriasController ###");
 
-            var categorias = _uof.CategoriaRepository.GetAll();
+            var categorias = await _uof.CategoriaRepository.GetAllAsync();
 
             //Exemplo de leitura do appSettings Json.    
             var tes = _configuration.GetValue<string>("Chave");
@@ -52,9 +52,9 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet("{id}", Name = "ObterCategoriaAsync")]
-        public ActionResult<Categoria> GetCategoriasAsync(int id)
+        public async Task<ActionResult<Categoria>> GetCategoriasAsync(int id)
         {
-            var categoria = _uof.CategoriaRepository.Get(c => c.Id == id);
+            var categoria = await _uof.CategoriaRepository.GetAsync(c => c.Id == id);
 
             if (categoria == null)
             {
@@ -65,19 +65,19 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Categoria categoria)
+        public async Task<ActionResult> Post([FromBody] Categoria categoria)
         {
             _uof.CategoriaRepository.Create(categoria);
-            _uof.Commit();
+            await _uof.CommitAsync();
             return new CreatedAtRouteResult("ObterCategoriaAsync", new { id = categoria.Id }, categoria);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Categoria> Delete(int id)
+        public async Task<ActionResult<Categoria>> Delete(int id)
         {
-            var categoria = _uof.CategoriaRepository.Get(c => c.Id == id);
+            var categoria = await _uof.CategoriaRepository.GetAsync(c => c.Id == id);
             var cat = _uof.CategoriaRepository.Delete(categoria);
-            _uof.Commit();
+            await _uof.CommitAsync();
 
             if (categoria == null)
             {
@@ -88,7 +88,7 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Categoria categoria)
+        public async Task<ActionResult> Put(int id, [FromBody] Categoria categoria)
         {
             if (id != categoria.Id)
             {
@@ -96,7 +96,7 @@ namespace ApiCatalago.Controllers
             }
 
             _uof.CategoriaRepository.Update(categoria);
-            _uof.Commit();
+            await _uof.CommitAsync();
             return Ok();
         }
     }

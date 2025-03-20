@@ -5,8 +5,8 @@ namespace ApiCatalago.Interfaces;
 
 public interface IProdutoRepository : IRepository<Produto>
 {
-    IEnumerable<Produto> GetProdutosPorCategoria(int id);
-    PagedList<Produto> GetProdutosPage(ProdutoParametersQuery produtoParameters);
-    PagedList<Produto> GetProdutosFiltroPreco(ProdutosFiltroPreco produtoParameters);
+    Task<IEnumerable<Produto>> GetProdutosPorCategoriaAsync(int id);
+    Task<PagedList<Produto>> GetProdutosPageAsync(ProdutoParametersQuery produtoParameters);
+    Task<PagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtoParameters);
     
 }

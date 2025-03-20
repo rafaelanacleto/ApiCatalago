@@ -32,9 +32,9 @@ namespace ApiCatalago.Controllers
 
 
         [HttpGet("filter/preco/pagination")]
-        public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco filtro)
+        public async Task<ActionResult<IEnumerable<ProdutoDTO>>> GetProdutosFilterPrecoAsync([FromQuery] ProdutosFiltroPreco filtro)
         {
-            var produtos = _uof.ProdutoRepository.GetProdutosFiltroPreco(filtro);
+            var produtos = await _uof.ProdutoRepository.GetProdutosFiltroPrecoAsync(filtro);
             return ObterProdutos(produtos);
         }
 
@@ -56,16 +56,17 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpGet] // GET: api/produtos
-        public ActionResult<IEnumerable<ProdutoDTO>> Get() ///Nunca retorne todos os registros, use Take(10) por exemplo
+        public async Task<ActionResult<IEnumerable<ProdutoDTO>>> GetAsync() ///Nunca retorne todos os registros, use Take(10) por exemplo
         {
-            return _mapper.Map<List<ProdutoDTO>>(_uof.ProdutoRepository.GetAll().ToList());
+            return _mapper.Map<List<ProdutoDTO>>(await _uof.ProdutoRepository.GetAllAsync());
         }
 
+
         [HttpGet("Pagination")] // GET: api/produtos
-        public ActionResult<IEnumerable<ProdutoDTO>>
-            Get([FromQuery] ProdutoParametersQuery produtoParameters) ///Nunca retorne todos os registros, use Take(10) por exemplo
+        public async Task<ActionResult<IEnumerable<ProdutoDTO>>>
+            GetPaginationAsync([FromQuery] ProdutoParametersQuery produtoParameters) ///Nunca retorne todos os registros, use Take(10) por exemplo
         {
-            var produtos = _uof.ProdutoRepository.GetProdutosPage(produtoParameters);
+            var produtos = await _uof.ProdutoRepository.GetProdutosPageAsync(produtoParameters);
             var metadata = new
             {
                 produtos.TotalCount,
@@ -82,9 +83,9 @@ namespace ApiCatalago.Controllers
 
 
         [HttpGet("{id}", Name = "ObterProduto")]
-        public ActionResult<ProdutoDTO> Get(int id)
+        public async Task<ActionResult<ProdutoDTO>> GetObterProdutoAsync(int id)
         {
-            var produto = _uof.ProdutoRepository.Get(p => p.Id == id);
+            var produto = await _uof.ProdutoRepository.GetAsync(p => p.Id == id);
 
             if (produto == null)
             {
@@ -95,15 +96,15 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Produto produto)
+        public async Task<ActionResult> Post([FromBody] Produto produto)
         {
             _uof.ProdutoRepository.Create(produto);
-            _uof.Commit();
+            await _uof.CommitAsync();
             return new CreatedAtRouteResult("ObterProduto", new { id = produto.Id }, produto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Produto produto)
+        public async Task<ActionResult> Put(int id, [FromBody] Produto produto)
         {
             if (id != produto.Id)
             {
@@ -111,17 +112,18 @@ namespace ApiCatalago.Controllers
             }
 
             _uof.ProdutoRepository.Update(produto);
-            _uof.Commit();
+            await _uof.CommitAsync();
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Produto> Delete(int id)
+        public async Task<ActionResult<Produto>> Delete(int id)
         {
-            var produto = _uof.ProdutoRepository.Get(p => p.Id == id);
+            var produto = await _uof.ProdutoRepository.GetAsync(p => p.Id == id);
             _uof.ProdutoRepository.Delete(produto);
-            _uof.Commit();
+            await _uof.CommitAsync();
             return produto;
         }
+
     }
 }
