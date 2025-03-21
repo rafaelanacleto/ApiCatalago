@@ -6,6 +6,7 @@ using ApiCatalago.Filters;
 using ApiCatalago.Interfaces;
 using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Logging;
+using ApiCatalago.Models;
 using ApiCatalago.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,7 +30,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(ApiCatalago.AutoMapper.MappingProfile));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
     
