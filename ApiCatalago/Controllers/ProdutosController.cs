@@ -9,6 +9,7 @@ using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
 using ApiCatalago.Pagination;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ using X.PagedList;
 
 namespace ApiCatalago.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProdutosController : ControllerBase
