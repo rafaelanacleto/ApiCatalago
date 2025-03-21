@@ -61,13 +61,26 @@ namespace ApiCatalago.Controllers
             _logger.LogInformation("### Acessando CategoriaPaginationAsync ...");
             var categorias = await _uof.CategoriaRepository.GetCategoriasAsync(parametersQuery);
 
+            var metadata = new
+            {
+                categorias.TotalItemCount,
+                categorias.PageSize,
+                categorias.PageNumber,
+                categorias.Count,
+                categorias.HasNextPage,
+                categorias.HasPreviousPage
+            };
+
+            Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
+
             //Exemplo de leitura do appSettings Json.    
             //var tes = _configuration.GetValue<string>("Chave");
             if (!categorias.Any()) return NoContent();
-            return Ok(ObterCategorias(categorias));
+
+            return Ok(categorias);
         }
 
-        private ActionResult<IEnumerable<ProdutoDTO>> ObterCategorias(PagedList<Categoria> categorias)
+        private ActionResult<IEnumerable<CategoriaDTO>> ObterCategorias(PagedList<Categoria> categorias)
         {
             var metadata = new
             {

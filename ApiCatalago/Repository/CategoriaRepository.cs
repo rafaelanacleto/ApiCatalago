@@ -3,6 +3,8 @@ using ApiCatalago.Interfaces;
 using ApiCatalago.Models;
 using ApiCatalago.Pagination;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace ApiCatalago.Repository;
 
@@ -12,13 +14,13 @@ public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
     {
     }
 
-    public async Task<PagedList<Categoria>> GetCategoriasAsync(CategoriaParametersQuery categoriaParameters)
+    public async Task<IPagedList<Categoria>> GetCategoriasAsync(CategoriaParametersQuery categoriaParameters)
     {
         var categorias = (await GetAllAsync())
             .OrderBy(c => c.Nome)
             .AsQueryable();
 
-        return PagedList<Categoria>.Create(categorias, categoriaParameters.Pagina, categoriaParameters.Quantidade);
+        return categorias.ToPagedList(categoriaParameters.Pagina, categoriaParameters.Quantidade);
 
     }
 }

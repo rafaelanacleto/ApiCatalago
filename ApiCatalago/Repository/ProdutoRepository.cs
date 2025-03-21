@@ -1,9 +1,13 @@
+using System.Linq;
 using System.Linq.Expressions;
 using ApiCatalago.Context;
+using ApiCatalago.Dtos;
 using ApiCatalago.Interfaces;
 using ApiCatalago.Models;
 using ApiCatalago.Pagination;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace ApiCatalago.Repository;
 
@@ -13,32 +17,36 @@ public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
     }
 
-    public async Task<PagedList<Produto>> GetProdutosPageAsync(ProdutoParametersQuery produtoParameters)
-    {
-        var produtos = (await GetAllAsync())
-            .OrderBy(p => p.Id)
-            .AsQueryable();
-        
-        return PagedList<Produto>.Create(produtos, produtoParameters.Pagina, produtoParameters.Quantidade);
+    public async Task<IPagedList<Produto>> GetProdutosPageAsync(ProdutoParametersQuery produtoParameters)
+    {   
+        var produtos = await GetAllAsync();
+
+        var retorno = produtos.ToPagedList(produtoParameters.Pagina, produtoParameters.Quantidade);
+
+        return retorno;
     }
 
-    public async Task<PagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtoParameters)
-    {
-        var produtos = (await GetAllAsync()).AsQueryable();
+    public async Task<IPagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtoParameters)
+    {   
+        var produtos = await GetAllAsync();
 
         if (produtoParameters.Preco.HasValue && !string.IsNullOrEmpty(produtoParameters.PrecoCriterio))
         {
-            return produtoParameters.PrecoCriterio switch
+            if(produtoParameters.PrecoCriterio.Equals("maior"))
             {
-                "maior" => PagedList<Produto>.Create(produtos.Where(p => p.Preco > produtoParameters.Preco), 1, 10),
-                "menor" => PagedList<Produto>.Create(produtos.Where(p => p.Preco < produtoParameters.Preco), 1, 10),
-                _ => PagedList<Produto>.Create(produtos.Where(p => p.Preco == produtoParameters.Preco), 1, 10)
-            };
+                produtos =  produtos.Where(p => p.Preco > produtoParameters.Preco.Value).OrderBy(p => p.Preco);
+            }
+            else if (produtoParameters.PrecoCriterio.Equals("menor"))
+            {
+                produtos = produtos.Where(p => p.Preco < produtoParameters.Preco.Value).OrderBy(p => p.Preco);
+            }
+            else
+            {
+                produtos = produtos.Where(p => p.Preco == produtoParameters.Preco.Value).OrderBy(p => p.Preco);
+            }
         }
-        else
-        {
-            return PagedList<Produto>.Create(produtos, 1, 10);
-        }
+
+        return produtos.ToPagedList(produtoParameters.Pagina, produtoParameters.Quantidade);
     }
 
     public async Task<IEnumerable<Produto>> GetProdutosPorCategoriaAsync(int id)

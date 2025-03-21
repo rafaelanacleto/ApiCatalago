@@ -12,6 +12,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using X.PagedList;
 
 namespace ApiCatalago.Controllers
 {
@@ -39,16 +40,16 @@ namespace ApiCatalago.Controllers
         }
 
 
-        private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
+        private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(IPagedList<Produto> produtos)
         {
             var metadata = new
             {
-                produtos.TotalCount,
+                produtos.Count,
                 produtos.PageSize,
-                produtos.CurrentPage,
-                produtos.TotalPages,
-                produtos.HasNext,
-                produtos.HasPrevious
+                produtos.PageNumber,
+                produtos.PageCount,
+                produtos.HasNextPage,
+                produtos.HasPreviousPage
             };
             Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
             var produtosResult = _mapper.Map<List<ProdutoDTO>>(produtos);
@@ -69,12 +70,12 @@ namespace ApiCatalago.Controllers
             var produtos = await _uof.ProdutoRepository.GetProdutosPageAsync(produtoParameters);
             var metadata = new
             {
-                produtos.TotalCount,
+                produtos.Count,
                 produtos.PageSize,
-                produtos.CurrentPage,
-                produtos.TotalPages,
-                produtos.HasNext,
-                produtos.HasPrevious
+                produtos.PageNumber,
+                produtos.PageCount,
+                produtos.HasNextPage,
+                produtos.HasPreviousPage
             };
             Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
             var produtosResult = _mapper.Map<List<ProdutoDTO>>(produtos);
