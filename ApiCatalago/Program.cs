@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using ApiCatalago.Context;
 using ApiCatalago.Extensions;
@@ -7,6 +8,7 @@ using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Logging;
 using ApiCatalago.Repository;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -36,8 +38,31 @@ var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer");
+
+var secretKey = builder.Configuration["JWT:SecretKey"]
+                ?? throw new ArgumentException("Invalide secret key!");
+					
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero,
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+        };
+    });
 
 builder.Services.AddScoped<ApiLoggingFilter>();
 builder.Services.AddScoped<ApiExceptionFilter>();
