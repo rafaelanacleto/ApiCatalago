@@ -1548,3 +1548,180 @@ FROM `Categorias` AS `c`
  Information - ID: 0 - Name:  - ############################################
  Information - ID: 0 - Name:  - 13:46:29
  Information - ID: 0 - Name:  - Application is shutting down...
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+    "ProductVersion" TEXT NOT NULL
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+ Information - ID: 20402 - Name: Microsoft.EntityFrameworkCore.Migrations.MigrationApplying - Applying migration '20250410202749_InitialCreate'.
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_AspNetRoles" PRIMARY KEY,
+    "Name" TEXT NULL,
+    "NormalizedName" TEXT NULL,
+    "ConcurrencyStamp" TEXT NULL
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_AspNetUsers" PRIMARY KEY,
+    "RefreshToken" TEXT NULL,
+    "RefreshTokenExpiry" TEXT NOT NULL,
+    "UserName" TEXT NULL,
+    "NormalizedUserName" TEXT NULL,
+    "Email" TEXT NULL,
+    "NormalizedEmail" TEXT NULL,
+    "EmailConfirmed" INTEGER NOT NULL,
+    "PasswordHash" TEXT NULL,
+    "SecurityStamp" TEXT NULL,
+    "ConcurrencyStamp" TEXT NULL,
+    "PhoneNumber" TEXT NULL,
+    "PhoneNumberConfirmed" INTEGER NOT NULL,
+    "TwoFactorEnabled" INTEGER NOT NULL,
+    "LockoutEnd" TEXT NULL,
+    "LockoutEnabled" INTEGER NOT NULL,
+    "AccessFailedCount" INTEGER NOT NULL
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "Categorias" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Categorias" PRIMARY KEY AUTOINCREMENT,
+    "Nome" TEXT NOT NULL,
+    "ImagemPath" TEXT NOT NULL
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY AUTOINCREMENT,
+    "RoleId" TEXT NOT NULL,
+    "ClaimType" TEXT NULL,
+    "ClaimValue" TEXT NULL,
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY AUTOINCREMENT,
+    "UserId" TEXT NOT NULL,
+    "ClaimType" TEXT NULL,
+    "ClaimValue" TEXT NULL,
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" TEXT NOT NULL,
+    "ProviderKey" TEXT NOT NULL,
+    "ProviderDisplayName" TEXT NULL,
+    "UserId" TEXT NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" TEXT NOT NULL,
+    "RoleId" TEXT NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" TEXT NOT NULL,
+    "LoginProvider" TEXT NOT NULL,
+    "Name" TEXT NOT NULL,
+    "Value" TEXT NULL,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "Produtos" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Produtos" PRIMARY KEY AUTOINCREMENT,
+    "Nome" TEXT NOT NULL,
+    "Descricao" TEXT NOT NULL,
+    "Preco" decimal(10, 2) NOT NULL,
+    "ImagemUrl" TEXT NOT NULL,
+    "Estoque" REAL NOT NULL,
+    "DataCadastro" TEXT NOT NULL,
+    "CategoriaId" INTEGER NOT NULL,
+    CONSTRAINT "FK_Produtos_Categorias_CategoriaId" FOREIGN KEY ("CategoriaId") REFERENCES "Categorias" ("Id") ON DELETE CASCADE
+);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_Produtos_CategoriaId" ON "Produtos" ("CategoriaId");
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250410202749_InitialCreate', '8.0.15');
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: D:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:33:39
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:33:39
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "c"."Id", "c"."ImagemPath", "c"."Nome"
+FROM "Categorias" AS "c"
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:33:40
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:33:40
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:09
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 8), @p1='?' (Size = 4)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Categorias" ("ImagemPath", "Nome")
+VALUES (@p0, @p1)
+RETURNING "Id";
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:09
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:24
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 8), @p1='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Categorias" ("ImagemPath", "Nome")
+VALUES (@p0, @p1)
+RETURNING "Id";
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:24
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:29
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:29
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "c"."Id", "c"."ImagemPath", "c"."Nome"
+FROM "Categorias" AS "c"
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:29
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:34:29
