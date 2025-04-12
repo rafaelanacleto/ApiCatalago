@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace ApiCatalago.Services
 {
@@ -7,7 +8,10 @@ namespace ApiCatalago.Services
     {
         public JwtSecurityToken GenerateAccessToken(IEnumerable<Claim> claims, IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            
+            var key = configuration.GetSection("JWT").GetValue<string>("SecretKey") ?? string.Empty;
+            
+
         }
         public string GenerateRefreshToken()
         {
@@ -17,7 +21,5 @@ namespace ApiCatalago.Services
         {
             throw new NotImplementedException();
         }
-    }
-    {
     }
 }
