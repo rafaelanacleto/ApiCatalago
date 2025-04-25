@@ -36,7 +36,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=database.sqlite"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 
 builder.Services.AddAuthorization();
 
