@@ -239,3 +239,28 @@ WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
  Information - ID: 0 - Name:  - ############################################
  Information - ID: 0 - Name:  - 18:50:53
  Error - ID: 0 - Name:  - ### ApiExceptionFilter ### IDX10720: Unable to create KeyedHashAlgorithm for algorithm 'HS256', the key size must be greater than: '256' bits, key has '192' bits. (Parameter 'keyBytes')
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: https://localhost:7226
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: C:\repos\ApiCatalago\ApiCatalago
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:38:59
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (51ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (5ms) [Parameters=[@p16='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 256), @p7='?' (Size = 256), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (Size = 4000), @p12='?' (DbType = DateTime2), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [LockoutEnabled] = @p4, [LockoutEnd] = @p5, [NormalizedEmail] = @p6, [NormalizedUserName] = @p7, [PasswordHash] = @p8, [PhoneNumber] = @p9, [PhoneNumberConfirmed] = @p10, [RefreshToken] = @p11, [RefreshTokenExpiry] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 20:39:01

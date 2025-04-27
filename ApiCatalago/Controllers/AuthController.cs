@@ -107,6 +107,32 @@ namespace ApiCatalago.Controllers
             return Ok(new { message = "User registered successfully" });
         }
 
+        [HttpPost]
+        [Route("revoke")]
+        public async Task<IActionResult> Revoke([FromBody] RevokeTokenModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null || user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiry < DateTime.UtcNow)
+            {
+                return Unauthorized(new { message = "Invalid refresh token" });
+            }
+            user.RefreshToken = null;
+            user.RefreshTokenExpiry = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
+            return Ok(new { message = "Refresh token revoked successfully" });
+        }
+
+        [HttpGet]
+        [Route("get-roles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            var roles = await _roleManager.Roles.ToListAsync();
+            return Ok(roles.Select(r => r.Name));
+        }
+
+        [HttpPost]
+        [Route("add-role")]
+
 
     }
 }
