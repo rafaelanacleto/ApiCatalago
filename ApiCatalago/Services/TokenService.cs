@@ -15,7 +15,7 @@ namespace ApiCatalago.Services
             var privateKey = Encoding.UTF8.GetBytes(key);
             var securityKey = new SymmetricSecurityKey(privateKey);
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expiration = DateTime.UtcNow.AddMinutes(30);
+            var expiration = DateTime.UtcNow.AddMinutes(35);
             var token = new JwtSecurityToken(
                 issuer: configuration.GetSection("JWT").GetValue<string>("Issuer"),
                 audience: configuration.GetSection("JWT").GetValue<string>("Audience"),

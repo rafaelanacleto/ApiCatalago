@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen(setup =>
     {
         Name = "Authorization",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
         Scheme = "bearer",
         BearerFormat = "JWT",
         Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
@@ -49,7 +49,17 @@ builder.Services.AddSwaggerGen(setup =>
     setup.AddSecurityDefinition("Bearer", securityScheme);
     setup.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
-        { securityScheme, new string[] { } }
+        { 
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
     });
 });
 builder.Services.AddAutoMapper(typeof(ApiCatalago.AutoMapper.MappingProfile));
