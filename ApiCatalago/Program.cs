@@ -28,7 +28,30 @@ builder.Services.AddControllers(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setup =>
+{
+    setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Catalog API",
+        Version = "v1",
+        Description = "Catalog API for managing products and categories"
+    });
+
+    var securityScheme = new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+    };
+    setup.AddSecurityDefinition("Bearer", securityScheme);
+    setup.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        { securityScheme, new string[] { } }
+    });
+});
 builder.Services.AddAutoMapper(typeof(ApiCatalago.AutoMapper.MappingProfile));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

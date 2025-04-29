@@ -406,3 +406,178 @@ VALUES (N'20250425134154_InicialMigrations', N'8.0.15');
  Information - ID: 0 - Name:  - Hosting environment: Development
  Information - ID: 0 - Name:  - Content root path: /home/rafael/repos/ApiCatalago/ApiCatalago
  Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - Application is shutting down...
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /home/rafael/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:27
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (55ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 80)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Categorias] ([ImagemPath], [Nome])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:28
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:41
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 80)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Categorias] ([ImagemPath], [Nome])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:41
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:51
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (39ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 80)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Categorias] ([ImagemPath], [Nome])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:51
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:56
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:56
+ Information - ID: 0 - Name:  - ### Acessando o CategoriasController ###
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [c].[Id], [c].[ImagemPath], [c].[Nome]
+FROM [Categorias] AS [c]
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:56
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 16:58:56
+ Information - ID: 0 - Name:  - Application is shutting down...
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /home/rafael/repos/ApiCatalago/ApiCatalago
+ Warning - ID: 3 - Name: FailedToDeterminePort - Failed to determine the https port for redirect.
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:02:59
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (59ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:03:00
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:03:13
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:03:13
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:03:49
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 17:03:49
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 08:53:50
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (14ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (16ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = DateTime2), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [RefreshToken], [RefreshTokenExpiry], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetRoles] ([Id], [ConcurrencyStamp], [Name], [NormalizedName])
+VALUES (@p0, @p1, @p2, @p3);
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (10ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (11ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (16ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p18='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p19='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = DateTime2), @p15='?' (Size = 4000), @p16='?' (DbType = Boolean), @p17='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [NormalizedEmail] = @p8, [NormalizedUserName] = @p9, [PasswordHash] = @p10, [PhoneNumber] = @p11, [PhoneNumberConfirmed] = @p12, [RefreshToken] = @p13, [RefreshTokenExpiry] = @p14, [SecurityStamp] = @p15, [TwoFactorEnabled] = @p16, [UserName] = @p17
+OUTPUT 1
+WHERE [Id] = @p18 AND [ConcurrencyStamp] = @p19;
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 08:53:51
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 08:53:59
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 08:53:59
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuting
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 08:54:09
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiry], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+ Information - ID: 20101 - Name: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (18ms) [Parameters=[@p16='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 256), @p7='?' (Size = 256), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (Size = 4000), @p12='?' (DbType = DateTime2), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [LockoutEnabled] = @p4, [LockoutEnd] = @p5, [NormalizedEmail] = @p6, [NormalizedUserName] = @p7, [PasswordHash] = @p8, [PhoneNumber] = @p9, [PhoneNumberConfirmed] = @p10, [RefreshToken] = @p11, [RefreshTokenExpiry] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+ Information - ID: 0 - Name:  - ### Executando -> OnActionExecuted
+ Information - ID: 0 - Name:  - ############################################
+ Information - ID: 0 - Name:  - 08:54:09
+ Information - ID: 14 - Name: ListeningOnAddress - Now listening on: http://localhost:5123
+ Information - ID: 0 - Name:  - Application started. Press Ctrl+C to shut down.
+ Information - ID: 0 - Name:  - Hosting environment: Development
+ Information - ID: 0 - Name:  - Content root path: /home/rafael/repos/ApiCatalago/ApiCatalago
