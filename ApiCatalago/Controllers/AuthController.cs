@@ -18,16 +18,16 @@ namespace ApiCatalago.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;  
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
-        private readonly IConfiguration _configuration;        
+        private readonly IConfiguration _configuration;
 
         public AuthController(ITokenService tokenService, IMapper mapper, IConfiguration configuration, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _tokenService = tokenService;
-            _mapper = mapper;            
+            _mapper = mapper;
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -45,8 +45,24 @@ namespace ApiCatalago.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName!),
+                new Claim(ClaimTypes.Email, user.Email !)
             };
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            if (userRoles != null && userRoles.Count > 0)
+            {
+                foreach (var role in userRoles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
+            }
+            else
+            {
+                return Unauthorized(new { message = "User does not have a role" });
+            }
+
             var accessToken = _tokenService.GenerateAccessToken(claims, _configuration);
             var refreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = refreshToken;
@@ -122,6 +138,39 @@ namespace ApiCatalago.Controllers
             return Ok(new { message = "Refresh token revoked successfully" });
         }
 
+        [HttpPost]
+        [Route("create-role")]
+        public async Task<IActionResult> CreateRole([FromBody] string roleName)
+        {
+            if (string.IsNullOrEmpty(roleName))
+            {
+                return BadRequest(new { message = "Role name cannot be empty" });
+            }
+            if (!await _roleManager.RoleExistsAsync(roleName))
+            {
+                await _roleManager.CreateAsync(new IdentityRole(roleName));
+                return Ok(new { message = "Role created successfully" });
+            }
+            return BadRequest(new { message = "Role already exists" });
+
+        }
+
+        [HttpPost]
+        [Route("add-role-to-user")]
+        public async Task<IActionResult> AddRoleToUser([FromBody] AddRoleToUserModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            if (!await _roleManager.RoleExistsAsync(model.RoleName))
+            {
+                return BadRequest(new { message = "Role does not exist" });
+            }
+            await _userManager.AddToRoleAsync(user, model.RoleName);
+            return Ok(new { message = "Role added to user successfully" });
+        }
 
     }
 }
