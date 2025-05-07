@@ -72,7 +72,16 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(
+    op =>
+    {
+        op.AddPolicy("Bearer", builder =>
+        {
+            builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            builder.RequireAuthenticatedUser();
+        });
+    }
+    );
 
 var secretKey = builder.Configuration["JWT:SecretKey"]
                 ?? throw new ArgumentException("Invalide secret key!");
