@@ -80,8 +80,20 @@ builder.Services.AddAuthorization(
             builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             builder.RequireAuthenticatedUser();
         });
+        op.AddPolicy("Admin", builder =>
+        {
+            builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            builder.RequireAuthenticatedUser();
+            builder.RequireRole("Admin");
+        });
+        op.AddPolicy("User", builder =>
+        {
+            builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            builder.RequireAuthenticatedUser();
+            builder.RequireRole("User");
+        });
     }
-    );
+);
 
 var secretKey = builder.Configuration["JWT:SecretKey"]
                 ?? throw new ArgumentException("Invalide secret key!");

@@ -172,5 +172,18 @@ namespace ApiCatalago.Controllers
             return Ok(new { message = "Role added to user successfully" });
         }
 
+        [HttpGet]
+        [Route("get-user-roles/{userId}")]
+        public async Task<IActionResult> GetUserRoles(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(new { Roles = roles });
+        }
+
     }
 }
