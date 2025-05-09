@@ -79,6 +79,7 @@ builder.Services.AddAuthorization(
         {
             builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             builder.RequireAuthenticatedUser();
+            builder.RequireRole("Bearer");
         });
         op.AddPolicy("Admin", builder =>
         {
