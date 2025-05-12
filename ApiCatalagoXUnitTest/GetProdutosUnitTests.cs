@@ -2,17 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiCatalago.Controllers;
 using Xunit;
 
 namespace ApiCatalagoXUnitTest
 {
     public class GetProdutosUnitTests : IClassFixture<ProdutosUnitTestController>
     {
-        private readonly ProdutosUnitTestController _produtosUnitTestController;
+        private readonly ProdutosController _controller;
 
-        public GetProdutosUnitTests(ProdutosUnitTestController produtosUnitTestController)
+        public GetProdutosUnitTests(ProdutosUnitTestController controller)
         {
-            _produtosUnitTestController = produtosUnitTestController;
+            _controller = new ProdutosController(controller.repository, controller.mapper); 
         }
 
         [Fact]
