@@ -54,6 +54,17 @@ namespace ApiCatalagoXUnitTest
             Assert.Equal(expectedId, produto!.Id);
         }
 
+        [Fact]
+        public async Task GetProdutoById_Return_Notfound()
+        {
+            // Arrange
+            var prodId = 9999; // Non-existent product ID
+                               // Act
+            var result = await _controller.GetObterProdutoAsync(prodId);
+            // Assert
+            Assert.NotNull(result);
+        }
+
     }
 
 }
