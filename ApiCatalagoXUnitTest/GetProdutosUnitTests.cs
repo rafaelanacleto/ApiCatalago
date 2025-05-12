@@ -22,6 +22,38 @@ namespace ApiCatalagoXUnitTest
             Assert.True(true);
         }
 
+        [Fact]
+        public async Task GetAllProdutos()
+        {
+            // Arrange
+            var expectedCount = 2; // Adjust this based on your test data
+
+            // Act
+            var result = await _controller.GetAsync();
+            var produtos = result.Value;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(expectedCount, produtos!.Count());
+            Assert.All(produtos, produto => Assert.NotNull(produto));
+        }
+
+        [Fact]
+        public async Task GetProdutoById()
+        {
+            // Arrange
+            var expectedId = 1; // Adjust this based on your test data
+
+            // Act
+            var result = await _controller.GetObterProdutoAsync(expectedId);
+            var produto = result.Value;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.NotNull(produto);
+            Assert.Equal(expectedId, produto!.Id);
+        }
+
     }
 
 }
