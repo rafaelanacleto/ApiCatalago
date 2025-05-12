@@ -22,14 +22,12 @@ namespace ApiCatalago.Controllers
     [Route("api/[controller]")]
     public class ProdutosController : ControllerBase
     {
-        private readonly IDbUnitOfWork _uof;
-        private readonly IRepository<Produto> _repository;
+        private readonly IDbUnitOfWork _uof;       
         private readonly IMapper _mapper;
 
-        public ProdutosController(IDbUnitOfWork produtoRepository, IRepository<Produto> repository, IMapper mapper)
+        public ProdutosController(IDbUnitOfWork produtoRepository,IMapper mapper)
         {
-            _uof = produtoRepository;
-            _repository = repository;
+            _uof = produtoRepository;           
             _mapper = mapper;
         }
 

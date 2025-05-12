@@ -10,6 +10,7 @@ using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Models;
 using ApiCatalago.Pagination;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -119,6 +120,7 @@ namespace ApiCatalago.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<ActionResult<Categoria>> Delete(int id)
         {
             var categoria = await _uof.CategoriaRepository.GetAsync(c => c.Id == id);

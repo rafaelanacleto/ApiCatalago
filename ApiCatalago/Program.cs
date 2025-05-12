@@ -8,6 +8,7 @@ using ApiCatalago.Interfaces.Auxiliar;
 using ApiCatalago.Logging;
 using ApiCatalago.Models;
 using ApiCatalago.Repository;
+using ApiCatalago.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +28,40 @@ builder.Services.AddControllers(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setup =>
+{
+    setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Catalog API",
+        Version = "v1",
+        Description = "Catalog API for managing products and categories"
+    });
+
+    var securityScheme = new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+    };
+    setup.AddSecurityDefinition("Bearer", securityScheme);
+    setup.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        { 
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 builder.Services.AddAutoMapper(typeof(ApiCatalago.AutoMapper.MappingProfile));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -36,9 +70,31 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(
+    op =>
+    {
+        op.AddPolicy("Bearer", builder =>
+        {
+            builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            builder.RequireAuthenticatedUser();
+            builder.RequireRole("Bearer");
+        });
+        op.AddPolicy("Admin", builder =>
+        {
+            builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            builder.RequireAuthenticatedUser();
+            builder.RequireRole("Admin");
+        });
+        op.AddPolicy("User", builder =>
+        {
+            builder.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            builder.RequireAuthenticatedUser();
+            builder.RequireRole("User");
+        });
+    }
+);
 
 var secretKey = builder.Configuration["JWT:SecretKey"]
                 ?? throw new ArgumentException("Invalide secret key!");
@@ -72,6 +128,7 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IDbUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {
